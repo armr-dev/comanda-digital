@@ -1,0 +1,16 @@
+body {
+  background-color: black;
+}
+
+.home {
+  height: 100vh;
+  background-color: #ececec;
+}
+
+.home-content {
+  padding: 16px;
+}
+
+.loader {
+  margin: 12px;
+}

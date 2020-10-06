@@ -1,13 +1,15 @@
 import { gql } from "@apollo/client";
 
 const GET_ORDERS = gql`
-  query getOrders {
-    id
-    events {
-      data
-      eventType
+  {
+    getOrders {
       id
-      timestamp
+      events {
+        data
+        eventType
+        id
+        timestamp
+      }
     }
   }
 `;
@@ -35,11 +37,13 @@ const GET_ORDER = gql`
 `;
 
 const GET_ITEMS = gql`
-  query getItems {
-    description
-    id
-    name
-    price
+  {
+    getItems {
+      description
+      id
+      name
+      price
+    }
   }
 `;
 
