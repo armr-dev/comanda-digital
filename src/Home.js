@@ -1,7 +1,10 @@
 import React from "react";
 import { ApolloProvider, useQuery, gql } from "@apollo/client";
+import { Button } from "semantic-ui-react";
 import client from "./services/client";
 import { GET_ORDERS } from "./services/queries";
+
+import Header from "./components/Header";
 
 function Orders({ id }) {
   const { loading, error, data } = useQuery(GET_ORDERS, {
@@ -17,9 +20,9 @@ function Orders({ id }) {
 function Home() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        <h2>foi</h2>
-        <Orders id={0} />
+      <div className="home">
+        <Header />
+        <Button>Nova comanda</Button>
       </div>
     </ApolloProvider>
   );

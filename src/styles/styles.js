@@ -1,2 +1,2 @@
-import "./App.css";
-import "./index.css";
+import "./header.css";
+import "./home.css";
