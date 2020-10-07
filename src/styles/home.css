@@ -14,3 +14,11 @@ body {
 .loader {
   margin: 12px;
 }
+
+.modal-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

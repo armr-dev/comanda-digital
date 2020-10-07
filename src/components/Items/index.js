@@ -16,7 +16,7 @@ function Items() {
     );
   if (error) return `Error! ${error}`;
 
-  console.log("ITEMS:", data.getItems);
+  // console.log("ITEMS:", data.getItems);
 
   return data.getItems.map((item) => {
     return (

@@ -15,7 +15,7 @@ function checkIfOpen(order) {
   }
 }
 
-function Orders() {
+function Orders(props) {
   const { loading, error, data } = useQuery(GET_ORDERS);
 
   if (loading)
@@ -26,13 +26,16 @@ function Orders() {
     );
   if (error) return `Error! ${error}`;
 
-  console.log("ORDER:", data.getOrders);
-
   return (
     <Table.Body>
       {data.getOrders.map((item) => {
         return (
-          <Table.Row>
+          <Table.Row
+            onClick={() => {
+              props.selectedOrder(item);
+              props.modalOpen(true);
+            }}
+          >
             <Table.Cell>{item.id}</Table.Cell>
             <Table.Cell>{checkIfOpen ? "Aberta" : "Fechada"}</Table.Cell>
           </Table.Row>
