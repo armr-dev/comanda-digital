@@ -8,10 +8,6 @@ import { Loader, Select, Dimmer } from "semantic-ui-react";
 function ItemSelector(props) {
   const { loading, error, data } = useQuery(GET_ITEMS);
 
-  const getItem = (e, { value }) => {
-    props.callback(value);
-  };
-
   if (loading)
     return (
       <div>
