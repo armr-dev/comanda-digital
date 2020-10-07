@@ -4,6 +4,7 @@ import { Modal, Table, Button, Select } from "semantic-ui-react";
 import { ADD_EVENT } from "../../services/queries";
 
 import AddItem from "../AddItem";
+import RemoveItem from "../RemoveItem";
 
 function checkIfOpen(order) {
   for (let event of order.events) {
@@ -44,6 +45,8 @@ const EventModal = (props) => {
       <Modal.Header>{`Eventos da ordem # ${selectedOrder.id}`}</Modal.Header>
       {addItems ? (
         <AddItem id={selectedOrder.id} />
+      ) : removeItems ? (
+        <RemoveItem id={selectedOrder.id} />
       ) : (
         <Modal.Content>
           <h3>Abertura/fechamento da comanda</h3>
