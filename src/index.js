@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Home from "./Home";
+import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./styles/styles";
 import "semantic-ui-css/semantic.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

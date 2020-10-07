@@ -6,13 +6,12 @@ import { GET_ORDERS } from "../../services/queries";
 import { Loader, Table } from "semantic-ui-react";
 
 function checkIfOpen(order) {
-  for (let item in order) {
-    if (item.eventType === "ORDER_CLOSED") {
+  for (let event of order.events) {
+    if (event.eventType === "ORDER_CLOSED") {
       return false;
-    } else {
-      return true;
     }
   }
+  return true;
 }
 
 function Orders(props) {
@@ -26,6 +25,7 @@ function Orders(props) {
     );
   if (error) return `Error! ${error}`;
 
+  console.log(data);
   return (
     <Table.Body>
       {data.getOrders.map((item) => {
@@ -37,7 +37,7 @@ function Orders(props) {
             }}
           >
             <Table.Cell>{item.id}</Table.Cell>
-            <Table.Cell>{checkIfOpen ? "Aberta" : "Fechada"}</Table.Cell>
+            <Table.Cell>{checkIfOpen(item) ? "Aberta" : "Fechada"}</Table.Cell>
           </Table.Row>
         );
       })}

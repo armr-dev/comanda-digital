@@ -3,9 +3,19 @@ import { useMutation } from "@apollo/client";
 import { Modal, Table, Button } from "semantic-ui-react";
 import { ADD_EVENT } from "../../services/queries";
 
+function checkIfOpen(order) {
+  for (let event of order.events) {
+    if (event.eventType === "ORDER_CLOSED") {
+      return false;
+    }
+  }
+  return true;
+}
+
 const CustomModal = (props) => {
   let { selectedOrder, modalOpen, setModalOpen } = props;
   const [addEvent, { data }] = useMutation(ADD_EVENT);
+  console.log(data);
   const closeOrder = () => {
     const orderID = selectedOrder.id;
     const eventType = "ORDER_CLOSED";
@@ -89,15 +99,17 @@ const CustomModal = (props) => {
             })}
           </Table.Body>
         </Table>
-        <div className={"modal-buttons"}>
-          <div>
-            <Button>Adicionar item</Button>
-            <Button>Remover item</Button>
+        {checkIfOpen(selectedOrder) ? (
+          <div className={"modal-buttons"}>
+            <div>
+              <Button>Adicionar item</Button>
+              <Button>Remover item</Button>
+            </div>
+            <Button color="red" onClick={closeOrder}>
+              Finalizar comanda
+            </Button>
           </div>
-          <Button color="red" onClick={closeOrder}>
-            Finalizar comanda
-          </Button>
-        </div>
+        ) : null}
       </Modal.Content>
     </Modal>
   ) : null;

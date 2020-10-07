@@ -55,16 +55,37 @@ const ADD_EVENT = gql`
     $data: String
   ) {
     addEvent(
-      orderID: $id
+      orderID: $orderID
       eventType: $eventType
       timestamp: $timestamp
       data: $data
-    )
-    id
-    eventType
-    timestamp
-    data
+    ) {
+      id
+      eventType
+      timestamp
+      data
+    }
+  }
+`;
+const CREATE_ORDER = gql`
+  mutation CreateOrder {
+    createOrder {
+      events {
+        data
+        eventType
+        id
+        timestamp
+      }
+      id
+    }
   }
 `;
 
-export { GET_ORDERS, GET_ORDER_SUMMARY, GET_ORDER, GET_ITEMS, ADD_EVENT };
+export {
+  GET_ORDERS,
+  GET_ORDER_SUMMARY,
+  GET_ORDER,
+  GET_ITEMS,
+  ADD_EVENT,
+  CREATE_ORDER,
+};
