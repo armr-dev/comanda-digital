@@ -6,8 +6,7 @@ import { CREATE_ORDER } from "../../services/queries";
 
 import Header from "../Header";
 import Orders from "../Orders";
-import Items from "../Items";
-import CustomModal from "../CustomModal";
+import EventModal from "../EventModal";
 
 function Home() {
   const [selectedOrder, setSelectedOrder] = useState();
@@ -31,24 +30,11 @@ function Home() {
           </Table.Header>
           <Orders selectedOrder={setSelectedOrder} modalOpen={setModalOpen} />
         </Table>
-        <CustomModal
+        <EventModal
           modalOpen={modalOpen}
           selectedOrder={selectedOrder}
           setModalOpen={setModalOpen}
         />
-        <h3>Items</h3>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Nome</Table.HeaderCell>
-              <Table.HeaderCell>Descrição</Table.HeaderCell>
-              <Table.HeaderCell>Preço</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Items />
-          </Table.Body>
-        </Table>
       </div>
     </div>
   );

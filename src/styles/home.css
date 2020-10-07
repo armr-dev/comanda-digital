@@ -18,3 +18,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.add-items {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-button {
+  margin-left: 8px !important;
+}
