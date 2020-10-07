@@ -47,4 +47,24 @@ const GET_ITEMS = gql`
   }
 `;
 
-export { GET_ORDERS, GET_ORDER_SUMMARY, GET_ORDER, GET_ITEMS };
+const ADD_EVENT = gql`
+  mutation addEvent(
+    $orderID: Int!
+    $eventType: OrderEvents
+    $timestamp: String
+    $data: String
+  ) {
+    addEvent(
+      orderID: $id
+      eventType: $eventType
+      timestamp: $timestamp
+      data: $data
+    )
+    id
+    eventType
+    timestamp
+    data
+  }
+`;
+
+export { GET_ORDERS, GET_ORDER_SUMMARY, GET_ORDER, GET_ITEMS, ADD_EVENT };
