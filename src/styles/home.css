@@ -7,8 +7,8 @@
   padding: 16px;
 }
 
-.loader {
-  margin: 12px;
+.add-order-button {
+  float: right;
 }
 
 .modal-buttons {
