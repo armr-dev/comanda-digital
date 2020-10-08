@@ -46,6 +46,8 @@ const CloseOrder = (props) => {
           variables: { orderID, eventType, timestamp, data },
           refetchQueries: [{ query: GET_ORDERS }],
         });
+        props.setAddItems(false);
+        props.setRemoveItems(false);
       }}
     >
       Finalizar comanda

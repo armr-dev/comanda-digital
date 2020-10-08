@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Modal, Table, Button, Loader, Dimmer } from "semantic-ui-react";
-import { ADD_EVENT, GET_ORDERS, GET_ORDER } from "../../services/queries";
+import { GET_ORDER } from "../../services/queries";
 
 import AddItem from "../AddItem";
 import RemoveItem from "../RemoveItem";
@@ -140,7 +140,11 @@ const EventModal = (props) => {
                 </Button>
               </Button.Group>
             </div>
-            <CloseOrder selectedOrder={selectedOrder} />
+            <CloseOrder
+              selectedOrder={selectedOrder}
+              setRemoveItems={setRemoveItems}
+              setAddItems={setAddItems}
+            />
           </div>
         ) : null}
       </Modal.Actions>
