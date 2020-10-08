@@ -1,0 +1,26 @@
+.card {
+  height: fit-content;
+}
+
+.card-header-wrapper {
+  background-color: #21ba45 !important;
+}
+
+.card-header {
+  color: white !important;
+}
+
+.closed {
+  background-color: #db2828 !important;
+}
+
+.card-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: grey;
+}
+
+.card-content-title {
+  color: black;
+}
