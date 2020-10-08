@@ -10,13 +10,11 @@ function ItemSelector(props) {
 
   if (loading)
     return (
-      <div>
-        <Loader active inline="centered" />
-      </div>
+      <Dimmer active>
+        <Loader />
+      </Dimmer>
     );
   if (error) return `Error! ${error}`;
-
-  // console.log("ITEMS:", data.getItems);
 
   let options = [];
   for (let item of data.getItems) {
