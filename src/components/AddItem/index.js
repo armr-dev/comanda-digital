@@ -1,12 +1,30 @@
 import React, { useState } from "react";
-import { Modal, Table, Button } from "semantic-ui-react";
+
 import { useMutation } from "@apollo/client";
-import { ADD_EVENT } from "../../services/queries";
+import { ADD_EVENT, GET_ORDER } from "../../services/queries";
+
+import { Modal, Button, Loader, Dimmer } from "semantic-ui-react";
+
 import ItemSelector from "../ItemSelector";
+import { notifySuccess, notifyError } from "../../utils/notifications";
 
 const AddItem = (props) => {
   const [item, setItem] = useState({});
-  const [addEvent, { data }] = useMutation(ADD_EVENT);
+  const [addEvent, { loading }] = useMutation(ADD_EVENT, {
+    onCompleted: () => {
+      notifySuccess("Item adicionado com sucesso!");
+    },
+    onError: () => {
+      notifyError("Erro ao adicionar item!");
+    },
+  });
+
+  if (loading)
+    return (
+      <Dimmer active>
+        <Loader />
+      </Dimmer>
+    );
 
   const addItem = () => {
     const orderID = props.id;
@@ -16,7 +34,10 @@ const AddItem = (props) => {
 
     console.log(orderID, eventType, timestamp, data);
 
-    addEvent({ variables: { orderID, eventType, timestamp, data } });
+    addEvent({
+      variables: { orderID, eventType, timestamp, data },
+      refetchQueries: [{ query: GET_ORDER, variables: { id: orderID } }],
+    });
   };
 
   return (
