@@ -5,8 +5,6 @@ import { ToastContainer } from "react-toastify";
 import * as serviceWorker from "./serviceWorker";
 
 import "./styles/styles";
-import "semantic-ui-css/semantic.min.css";
-import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <>
