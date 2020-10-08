@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 
 import { GET_ORDERS } from "../../services/queries";
-import { Loader, Table } from "semantic-ui-react";
+import { Loader, Dimmer, Table } from "semantic-ui-react";
 
 function checkIfOpen(order) {
   for (let event of order.events) {
@@ -19,13 +19,13 @@ function Orders(props) {
 
   if (loading)
     return (
-      <div className="loader">
-        <Loader active inline="centered" />
-      </div>
+      <Dimmer active>
+        <Loader />
+      </Dimmer>
     );
   if (error) return `Error! ${error}`;
 
-  console.log(data);
+  // console.log(data);
   return (
     <Table.Body>
       {data.getOrders.map((item) => {

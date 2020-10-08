@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { Modal, Table, Button, Select } from "semantic-ui-react";
-import { ADD_EVENT } from "../../services/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { Modal, Table, Button, Loader, Dimmer } from "semantic-ui-react";
+import { ADD_EVENT, GET_ORDERS, GET_ORDER } from "../../services/queries";
 
 import AddItem from "../AddItem";
 import RemoveItem from "../RemoveItem";
+import CloseOrder from "../CloseOrder";
 
 function checkIfOpen(order) {
   for (let event of order.events) {
@@ -16,29 +17,22 @@ function checkIfOpen(order) {
 }
 
 const EventModal = (props) => {
-  let { selectedOrder, modalOpen, setModalOpen } = props;
-  const [addItems, setAddItems] = useState(false);
   const [removeItems, setRemoveItems] = useState(false);
-  const [addEvent, { data }] = useMutation(ADD_EVENT);
+  const [addItems, setAddItems] = useState(false);
+  const { loading, error, data } = useQuery(GET_ORDER, {
+    variables: { id: props.id },
+  });
 
-  const closeOrder = () => {
-    const orderID = selectedOrder.id;
-    const eventType = "ORDER_CLOSED";
-    const timestamp = new Date().toISOString();
-    let price = 0;
+  if (loading)
+    return (
+      <Dimmer active>
+        <Loader />
+      </Dimmer>
+    );
+  if (error) return `Error! ${error}`;
 
-    for (let item of selectedOrder.events) {
-      if (item.eventType === "ITEM_ADD") {
-        price += parseFloat(JSON.parse(item.data).price);
-      } else if (item.eventType === "ITEM_REMOVE") {
-        price -= parseFloat(JSON.parse(item.data).price);
-      }
-    }
-
-    let data = JSON.toString({ price });
-
-    addEvent({ variables: { orderID, eventType, timestamp, data } });
-  };
+  let selectedOrder = data.getOrder;
+  let { modalOpen, setModalOpen } = props;
 
   return selectedOrder !== undefined ? (
     <Modal open={modalOpen} closeIcon onClose={() => setModalOpen(false)}>
@@ -84,7 +78,7 @@ const EventModal = (props) => {
               <Table.Row>
                 <Table.HeaderCell width={2}>Data</Table.HeaderCell>
                 <Table.HeaderCell width={3}>Evento</Table.HeaderCell>
-                <Table.HeaderCell width={3}>Dado</Table.HeaderCell>
+                <Table.HeaderCell width={3}>Nome do item</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -146,9 +140,7 @@ const EventModal = (props) => {
                 </Button>
               </Button.Group>
             </div>
-            <Button color="red" onClick={closeOrder}>
-              Finalizar comanda
-            </Button>
+            <CloseOrder selectedOrder={selectedOrder} />
           </div>
         ) : null}
       </Modal.Actions>

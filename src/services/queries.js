@@ -25,13 +25,15 @@ const GET_ORDER_SUMMARY = gql`
 `;
 
 const GET_ORDER = gql`
-  query getOrder($id: Int!) {
-    id
-    events {
-      data
-      eventType
+  query GetOrder($id: Int!) {
+    getOrder(id: $id) {
       id
-      timestamp
+      events {
+        data
+        eventType
+        id
+        timestamp
+      }
     }
   }
 `;
