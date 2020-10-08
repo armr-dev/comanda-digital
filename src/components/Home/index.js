@@ -28,6 +28,7 @@ function Home() {
       )}
       <div className="home-content">
         <Button
+          className="add-order-button"
           color="green"
           onClick={() => {
             createOrder({
@@ -42,16 +43,8 @@ function Home() {
         >
           Nova comanda
         </Button>
-        <h3>Comandas</h3>
-        <Table celled selectable>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell width={1}>Id</Table.HeaderCell>
-              <Table.HeaderCell width={16}>Status</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Orders selectedOrder={setSelectedOrder} modalOpen={setModalOpen} />
-        </Table>
+        <h2>Comandas</h2>
+        <Orders selectedOrder={setSelectedOrder} modalOpen={setModalOpen} />
         {selectedOrder && (
           <EventModal
             modalOpen={modalOpen}
