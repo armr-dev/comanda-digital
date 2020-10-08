@@ -1,12 +1,29 @@
 import React, { useState } from "react";
-import { Modal, Table, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import { ADD_EVENT } from "../../services/queries";
+
+import { Modal, Button, Loader, Dimmer } from "semantic-ui-react";
+
 import ItemSelector from "../ItemSelector";
+import { notifySuccess, notifyError } from "../../utils/notifications";
 
 const RemoveItem = (props) => {
   const [item, setItem] = useState({});
-  const [addEvent, { data }] = useMutation(ADD_EVENT);
+  const [addEvent, { loading }] = useMutation(ADD_EVENT, {
+    onCompleted: () => {
+      notifySuccess("Item removido com sucesso!");
+    },
+    onError: () => {
+      notifyError("Erro remover item!");
+    },
+  });
+
+  if (loading)
+    return (
+      <Dimmer active>
+        <Loader />
+      </Dimmer>
+    );
 
   const removeItem = () => {
     const orderID = props.id;
