@@ -6,7 +6,7 @@ import { notifySuccess, notifyError } from "../../utils/notifications";
 import { Button, Dimmer, Loader } from "semantic-ui-react";
 
 const CloseOrder = (props) => {
-  const [addEvent, { loading, error }] = useMutation(ADD_EVENT, {
+  const [addEvent, { loading }] = useMutation(ADD_EVENT, {
     onCompleted: () => {
       notifySuccess("Comanda fechada com sucesso!");
     },
@@ -21,7 +21,6 @@ const CloseOrder = (props) => {
         <Loader />
       </Dimmer>
     );
-  if (error) return `Error! ${error}`;
 
   const orderID = props.selectedOrder.id;
   const eventType = "ORDER_CLOSED";
